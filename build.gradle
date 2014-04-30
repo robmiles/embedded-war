@@ -26,6 +26,6 @@ war {
         }
     }
     from "$buildDir/classes/main"
-    manifest { attributes 'Main-Class': 'WarJettyServer' }
+    manifest { attributes 'Main-Class': 'EmbeddedWarJettyServer' }
 
 }

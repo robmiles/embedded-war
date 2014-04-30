@@ -7,7 +7,7 @@ import java.security.ProtectionDomain;
 /*
 This class demonstrates how to embed Jetty so that it will work from an embedded WAR.
  */
-public class WarJettyServer {
+public class EmbeddedWarJettyServer {
 
     public static void main(String args[]) throws Exception {
         Server server = new Server(8080);
@@ -16,7 +16,7 @@ public class WarJettyServer {
         context.setContextPath("/");
 
         // We need to use the ProtectionDomain to find where this class has been loaded from
-        ProtectionDomain protectionDomain = WarJettyServer.class.getProtectionDomain();
+        ProtectionDomain protectionDomain = EmbeddedWarJettyServer.class.getProtectionDomain();
         URL location = protectionDomain.getCodeSource().getLocation();
         context.setWar(location.toExternalForm());
 
