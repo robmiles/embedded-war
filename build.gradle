@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+    executableWarDeps
+}
+
+dependencies {
+	compile 'org.eclipse.jetty:jetty-server:9.2.0.M0'
+	compile 'org.eclipse.jetty:jetty-webapp:9.2.0.M0'
+    executableWarDeps 'org.eclipse.jetty:jetty-server:9.2.0.M0'
+    executableWarDeps 'org.eclipse.jetty:jetty-webapp:9.2.0.M0'
+}
+
+war {
+    from {
+        configurations.executableWarDeps.collect {
+            it.isDirectory() ? it : project.zipTree(it)
+        }
+    }
+    from "$buildDir/classes/main"
+    manifest { attributes 'Main-Class': 'WarJettyServer' }
+
+}
